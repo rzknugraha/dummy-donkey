@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
+	"github.com/common-nighthawk/go-figure"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 )
@@ -23,6 +23,7 @@ import (
 // }
 
 func main() {
+
 	router := NewRouter()
 
 	handler := cors.Default().Handler(router)
@@ -35,7 +36,9 @@ func main() {
 	})
 	handler = c.Handler(handler)
 
-	fmt.Printf("donkey start")
+	myFigure := figure.NewFigure("Donkey Start", "", true)
+	myFigure.Print()
+
 	if err := http.ListenAndServe(":8070", handler); err != nil {
 		log.Fatal("ListenAndServe Error: ", err)
 	}
